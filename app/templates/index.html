@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Полиграфический калькулятор</h1>
+    </header>
+    <main>
+        <section class="intro">
+            <h2>Добро пожаловать в полиграфический калькулятор!</h2>
+            <p>Выберите тип продукции для расчета:</p>
+        </section>
+        
+        <section class="product-types">
+            <div class="product-card">
+                <h3>Визитки</h3>
+                <p>Стандартные и нестандартные визитки с различными видами отделки</p>
+                <a href="{{ url_for('main.calculator', product_type='business_cards') }}" class="btn">Рассчитать</a>
+            </div>
+            
+            <div class="product-card">
+                <h3>Листовки</h3>
+                <p>Листовки и флаеры любых форматов и на разных типах бумаги</p>
+                <a href="{{ url_for('main.calculator', product_type='flyers') }}" class="btn">Рассчитать</a>
+            </div>
+            
+            <!-- Здесь будут добавлены другие типы продукции -->
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 Полиграфический калькулятор</p>
+    </footer>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Полиграфический калькулятор</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('main.index') }}">Главная</a></li>
+                <li><a href="{{ url_for('main.calculator', product_type='business_cards') }}">Визитки</a></li>
+                <li><a href="{{ url_for('main.calculator', product_type='flyers') }}">Листовки</a></li>
+                <!-- Здесь будут добавлены другие типы продукции -->
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Калькулятор для {{ product_type }}</h2>
+        
+        <div class="calculator-container">
+            <div class="form-container">
+                <!-- Форма будет заполняться с помощью JavaScript в зависимости от типа продукции -->
+                <div id="calculator-form"></div>
+                
+                <button id="calculate-button" class="btn primary">Рассчитать стоимость</button>
+            </div>
+            
+            <div class="result-container">
+                <h3>Результат расчета:</h3>
+                <div id="calculation-result">
+                    <p>Итоговая стоимость: <span id="price">0</span> руб.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 Полиграфический калькулятор</p>
+    </footer>
+    
+    <script>
+        // Текущий тип продукции
+        const productType = "{{ product_type }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
