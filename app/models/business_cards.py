@@ -3,16 +3,17 @@ from app.models.base import BaseCalculator
 class BusinessCardCalculator(BaseCalculator):
     """Калькулятор для расчета стоимости визиток"""
     
-    def __init__(self, quantity, paper_type, color_scheme, lamination=False, corners=None):
+    def __init__(self, quantity, paper_type, color_scheme, lamination=None, corners=None):
         super().__init__()
         self.quantity = quantity
         self.paper_type = paper_type
         self.color_scheme = color_scheme  # 4+0, 4+4, etc.
-        self.lamination = lamination      # Ламинация
+        self.lamination = lamination      # Тип и сторона ламинации
         self.corners = corners            # Скругление углов
         
         # Базовые цены для разных типов бумаги (за 100 шт)
         self.paper_prices = {
+            'offset_250': 400,     # Офсетная 250 г/м²
             'offset_300': 500,     # Офсетная 300 г/м²
             'coated_300': 700,     # Мелованная 300 г/м²
             'premium_350': 1000,   # Премиум 350 г/м²
@@ -24,6 +25,16 @@ class BusinessCardCalculator(BaseCalculator):
             '4+4': 1.7,    # Цветная печать с двух сторон
             '1+0': 0.7,    # Ч/б печать с одной стороны
             '1+1': 1.2,    # Ч/б печать с двух сторон
+        }
+
+        # Цены для разных типов ламинации (за 100 шт)
+        self.lamination_prices = {
+            'gloss_1': 150,      # Глянцевая с одной стороны
+            'gloss_2': 250,      # Глянцевая с двух сторон
+            'matte_1': 180,      # Матовая с одной стороны
+            'matte_2': 300,      # Матовая с двух сторон
+            'soft_touch_1': 250, # Софт-тач с одной стороны
+            'soft_touch_2': 400, # Софт-тач с двух сторон
         }
         
     def calculate(self, urgency='standard'):
@@ -40,7 +51,8 @@ class BusinessCardCalculator(BaseCalculator):
         
         # Добавляем стоимость постпечатной обработки
         if self.lamination:
-            price += 200 * (self.quantity / 100)  # Ламинация
+            lamination_price = self.lamination_prices.get(self.lamination, 200)
+            price += lamination_price * (self.quantity / 100)
             
         if self.corners:
             price += 150 * (self.quantity / 100)  # Скругление углов

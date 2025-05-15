@@ -29,6 +29,7 @@ function generateForm(productType) {
                 <div class="form-group">
                     <label for="paper_type">Тип бумаги</label>
                     <select id="paper_type" name="paper_type">
+                        <option value="offset_250">Офсетная 250 г/м²</option>
                         <option value="offset_300">Офсетная 300 г/м²</option>
                         <option value="coated_300">Мелованная 300 г/м²</option>
                         <option value="premium_350">Премиум 350 г/м²</option>
@@ -45,9 +46,17 @@ function generateForm(productType) {
                 </div>
                 <div class="form-group">
                     <label>Дополнительная обработка</label>
-                    <div>
-                        <input type="checkbox" id="lamination" name="lamination">
+                    <div class="form-group">
                         <label for="lamination">Ламинация</label>
+                        <select id="lamination" name="lamination">
+                            <option value="">Без ламинации</option>
+                            <option value="gloss_1">Глянцевая с одной стороны</option>
+                            <option value="gloss_2">Глянцевая с двух сторон</option>
+                            <option value="matte_1">Матовая с одной стороны</option>
+                            <option value="matte_2">Матовая с двух сторон</option>
+                            <option value="soft_touch_1">Софт-тач с одной стороны</option>
+                            <option value="soft_touch_2">Софт-тач с двух сторон</option>
+                        </select>
                     </div>
                     <div>
                         <input type="checkbox" id="corners" name="corners">

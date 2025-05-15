@@ -112,10 +112,22 @@ form {
     margin-bottom: 1rem;
 }
 
-label {
+/* Стили для дополнительной обработки */
+.form-group .form-group {
+    margin-left: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-group label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: bold;
+}
+
+.form-group input[type="checkbox"] + label {
+    display: inline;
+    font-weight: normal;
+    margin-left: 0.5rem;
 }
 
 input, select {
@@ -124,6 +136,15 @@ input, select {
     border: 1px solid #ddd;
     border-radius: 4px;
     font-size: 1rem;
+}
+
+select {
+    background-color: white;
+    cursor: pointer;
+}
+
+select:hover {
+    border-color: #bbb;
 }
 
 .btn {
