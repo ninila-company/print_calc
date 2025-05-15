@@ -21,10 +21,24 @@ class BaseCalculator:
     
     def apply_quantity_discount(self, price):
         """Применяет скидку в зависимости от тиража"""
-        if self.quantity >= 1000:
-            return price * 0.85  # Скидка 15% для больших тиражей
-        elif self.quantity >= 500:
-            return price * 0.9   # Скидка 10% для средних тиражей
-        elif self.quantity >= 100:
-            return price * 0.95  # Скидка 5% для небольших тиражей
+        if self.quantity >= 1008:
+            return price * 0.36
+        elif self.quantity >= 888:
+            return price * 0.43
+        elif self.quantity >= 816:
+            return price * 0.45
+        elif self.quantity >= 720:
+            return price * 0.47
+        elif self.quantity >= 600:
+            return price * 0.5
+        elif self.quantity >= 480:
+            return price * 0.52
+        elif self.quantity >= 408:
+            return price * 0.58
+        elif self.quantity >= 312:
+            return price * 0.66
+        elif self.quantity >= 216:
+            return price * 0.7
+        elif self.quantity >= 120:
+            return price * 0.8  # TODO Скидка 5% для небольших тиражей, пока поставил 1
         return price

@@ -29,10 +29,10 @@ function generateForm(productType) {
                 <div class="form-group">
                     <label for="paper_type">Тип бумаги</label>
                     <select id="paper_type" name="paper_type">
-                        <option value="offset_250">Офсетная 250 г/м²</option>
-                        <option value="offset_300">Офсетная 300 г/м²</option>
-                        <option value="coated_300">Мелованная 300 г/м²</option>
-                        <option value="premium_350">Премиум 350 г/м²</option>
+                        <option value="offset_270">Картон 270 г/м²</option>
+                        <option value="offset_300">Мелованная 300 г/м²</option>
+                        <option value="color_copy_300">Color Copy 300 г/м²</option>
+                        <option value="color_copy_350">Color Copy 350 г/м²</option>
                     </select>
                 </div>
                 <div class="form-group">

@@ -68,3 +68,6 @@ coverage.xml
 
 # flake8
 .flake8
+
+#excel
+*.xls

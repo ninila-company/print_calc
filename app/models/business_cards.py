@@ -5,26 +5,26 @@ class BusinessCardCalculator(BaseCalculator):
     
     def __init__(self, quantity, paper_type, color_scheme, lamination=None, corners=None):
         super().__init__()
-        self.quantity = quantity
-        self.paper_type = paper_type
+        self.quantity = quantity          # Кол-во
+        self.paper_type = paper_type      # Тип бумаги
         self.color_scheme = color_scheme  # 4+0, 4+4, etc.
         self.lamination = lamination      # Тип и сторона ламинации
         self.corners = corners            # Скругление углов
         
         # Базовые цены для разных типов бумаги (за 100 шт)
         self.paper_prices = {
-            'offset_250': 400,     # Офсетная 250 г/м²
-            'offset_300': 500,     # Офсетная 300 г/м²
-            'coated_300': 700,     # Мелованная 300 г/м²
-            'premium_350': 1000,   # Премиум 350 г/м²
+            'offset_270': 6.7,     # Офсетная 250 г/м²
+            'offset_300': 5,     # Офсетная 300 г/м²
+            'color_copy_300': 7,     # color copy 300 г/м²
+            'color_copy_350': 7.5,   # color copy 350 г/м²
         }
         
         # Коэффициенты для разных цветовых схем
         self.color_factors = {
             '4+0': 1.0,    # Цветная печать с одной стороны
-            '4+4': 1.7,    # Цветная печать с двух сторон
+            '4+4': 1.28,    # Цветная печать с двух сторон
             '1+0': 0.7,    # Ч/б печать с одной стороны
-            '1+1': 1.2,    # Ч/б печать с двух сторон
+            '1+1': 1.1,    # Ч/б печать с двух сторон
         }
 
         # Цены для разных типов ламинации (за 100 шт)
@@ -47,7 +47,7 @@ class BusinessCardCalculator(BaseCalculator):
         price = base_price * color_factor
         
         # Расчет для заданного тиража
-        price = price * (self.quantity / 100)
+        price = price * (self.quantity)
         
         # Добавляем стоимость постпечатной обработки
         if self.lamination:
