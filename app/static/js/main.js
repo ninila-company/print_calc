@@ -24,15 +24,13 @@ function generateForm(productType) {
             formHTML = `
                 <div class="form-group">
                     <label for="quantity">Тираж (шт)</label>
-                    <input type="number" id="quantity" name="quantity" value="100" min="10" step="10">
+                    <input type="number" id="quantity" name="quantity" value="100" min="48" step="48">
                 </div>
                 <div class="form-group">
                     <label for="paper_type">Тип бумаги</label>
                     <select id="paper_type" name="paper_type">
-                        <option value="offset_270">Картон 270 г/м²</option>
                         <option value="offset_300">Мелованная 300 г/м²</option>
                         <option value="color_copy_300">Color Copy 300 г/м²</option>
-                        <option value="color_copy_350">Color Copy 350 г/м²</option>
                     </select>
                 </div>
                 <div class="form-group">
