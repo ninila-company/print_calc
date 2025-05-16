@@ -24,7 +24,7 @@ function generateForm(productType) {
             formHTML = `
                 <div class="form-group">
                     <label for="quantity">Тираж (шт)</label>
-                    <input type="number" id="quantity" name="quantity" value="100" min="48" step="48">
+                    <input type="number" id="quantity" name="quantity" value="100" min="48" step="24">
                 </div>
                 <div class="form-group">
                     <label for="paper_type">Тип бумаги</label>
@@ -48,12 +48,16 @@ function generateForm(productType) {
                         <label for="lamination">Ламинация</label>
                         <select id="lamination" name="lamination">
                             <option value="">Без ламинации</option>
-                            <option value="gloss_1">Глянцевая с одной стороны</option>
-                            <option value="gloss_2">Глянцевая с двух сторон</option>
-                            <option value="matte_1">Матовая с одной стороны</option>
-                            <option value="matte_2">Матовая с двух сторон</option>
-                            <option value="soft_touch_1">Софт-тач с одной стороны</option>
-                            <option value="soft_touch_2">Софт-тач с двух сторон</option>
+                            <option value="gloss_32">Глянцевая 32 мкр</option>
+                            <option value="matte_32">Матовая 32 мкр</option>
+                            <option value="matte_32_anti">Матовая 32 мкр антивандальная</option>
+                            <option value="gloss_75">Глянцевая 75 мкр</option>
+                            <option value="matte_75">Матовая 75 мкр</option>
+                            <option value="gloss_150">Глянцевая 150 мкр</option>
+                            <option value="gloss_250">Глянцевая 250 мкр</option>
+                            <option value="matte_250">Матовая 250 мкр</option>
+                            <option value="soft_touch_1">Soft Touch</option>
+                            <option value="soft_touch_2">Soft Touch цифра</option>
                         </select>
                     </div>
                     <div>

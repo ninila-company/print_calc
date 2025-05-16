@@ -26,14 +26,18 @@ class BusinessCardCalculator(BaseCalculator):
             '1+1': 0.7,    # Ч/б печать с двух сторон
         }
 
-        # Цены для разных типов ламинации (за 100 шт)
+        # Цены для разных типов ламинации (за 1 шт)
         self.lamination_prices = {
-            'gloss_1': 150,      # Глянцевая с одной стороны
-            'gloss_2': 250,      # Глянцевая с двух сторон
-            'matte_1': 180,      # Матовая с одной стороны
-            'matte_2': 300,      # Матовая с двух сторон
-            'soft_touch_1': 250, # Софт-тач с одной стороны
-            'soft_touch_2': 400, # Софт-тач с двух сторон
+            'gloss_32': 1.1,
+            'matte_32': 1.25,
+            'matte_32_anti': 2.3,
+            'gloss_75': 1.85,
+            'matte_75': 2.45,
+            'gloss_150': 3.65,
+            'gloss_250': 4.6,
+            'matte_250': 6.75,
+            'soft_touch_1': 2.3,
+            'soft_touch_2': 2.8,
         }
         
     def _get_price_per_card(self):
@@ -59,7 +63,7 @@ class BusinessCardCalculator(BaseCalculator):
                 price_quantity = q
         
         # Получаем массив цен [цена_одностор, цена_двустор]
-        prices = paper_prices.get(str(price_quantity), [0, 0])
+        prices = paper_prices.get(str(price_quantity), [1.1, 0])
         
         # Выбираем цену в зависимости от типа печати (одно- или двусторонняя)
         is_double_sided = self.color_scheme.endswith('4')
@@ -72,20 +76,21 @@ class BusinessCardCalculator(BaseCalculator):
         # Получаем базовую цену за одну визитку
         price_per_card = self._get_price_per_card()
         
-        # Рассчитываем общую стоимость
-        price = price_per_card * self.quantity
-        
         # Применяем коэффициент для ч/б печати
         color_factor = self.color_factors.get(self.color_scheme, 1.0)
-        price = price * color_factor
+        price_per_card = price_per_card * color_factor
         
-        # Добавляем стоимость постпечатной обработки
+        # Добавляем стоимость ламинации к цене одной визитки
         if self.lamination:
-            lamination_price = self.lamination_prices.get(self.lamination, 200)
-            price += lamination_price * (self.quantity / 100)
+            lamination_price = self.lamination_prices.get(self.lamination, 0)
+            price_per_card += lamination_price
             
+        # Добавляем стоимость скругления углов к цене одной визитки
         if self.corners:
-            price += 150 * (self.quantity / 100)  # Скругление углов
+            price_per_card += 2  # Добавляем 2 рубля за скругление углов
+            
+        # Рассчитываем общую стоимость
+        price = price_per_card * self.quantity
         
         # Применяем коэффициент срочности
         price = self.apply_urgency(price, urgency)
