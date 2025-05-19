@@ -31,6 +31,7 @@ function generateForm(productType) {
                     <select id="paper_type" name="paper_type">
                         <option value="offset_300">Мелованная 300 г/м²</option>
                         <option value="color_copy_300">Color Copy 300 г/м²</option>
+                        <option value="color_copy_350">Color Copy 350 г/м²</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -62,7 +63,11 @@ function generateForm(productType) {
                     </div>
                     <div>
                         <input type="checkbox" id="corners" name="corners">
-                        <label for="corners">Скругление углов</label>
+                        <label for="corners" class="checkbox-label">Скругление углов</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="tech_hole" name="tech_hole">
+                        <label for="tech_hole" class="checkbox-label">Технологическое отверстие</label>
                     </div>
                 </div>
                 <div class="form-group">
@@ -72,6 +77,10 @@ function generateForm(productType) {
                         <option value="urgent">Срочная (1-2 дня, +30%)</option>
                         <option value="express">Экспресс (в тот же день, +60%)</option>
                     </select>
+                </div>
+                <div class="form-group">
+                    <label for="discount">Скидка (%)</label>
+                    <input type="number" id="discount" name="discount" min="0" max="100" step="1" placeholder="0">
                 </div>
             `;
             break;
@@ -118,6 +127,10 @@ function generateForm(productType) {
                         <option value="express">Экспресс (в тот же день, +60%)</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="discount">Скидка (%)</label>
+                    <input type="number" id="discount" name="discount" min="0" max="100" step="1" placeholder="0">
+                </div>
             `;
             break;
             
@@ -140,7 +153,11 @@ function calculatePrice() {
         if (input.type === 'checkbox') {
             formData[input.name] = input.checked;
         } else if (input.type === 'number') {
-            formData[input.name] = parseInt(input.value);
+            if (input.value === '' || isNaN(input.value)) {
+                formData[input.name] = null;
+            } else {
+                formData[input.name] = parseInt(input.value);
+            }
         } else {
             formData[input.name] = input.value;
         }

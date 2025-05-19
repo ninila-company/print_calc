@@ -5,13 +5,14 @@ import os
 class BusinessCardCalculator(BaseCalculator):
     """Калькулятор для расчета стоимости визиток"""
     
-    def __init__(self, quantity, paper_type, color_scheme, lamination=None, corners=None):
+    def __init__(self, quantity, paper_type, color_scheme, lamination=None, corners=None, tech_hole=False):
         super().__init__()
         self.quantity = quantity          # Кол-во
         self.paper_type = paper_type      # Тип бумаги
         self.color_scheme = color_scheme  # 4+0, 4+4, etc.
         self.lamination = lamination      # Тип и сторона ламинации
         self.corners = corners            # Скругление углов
+        self.tech_hole = tech_hole        # Технологическое отверстие
         
         # Загружаем данные о ценах из JSON файла
         json_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'papers.json')
@@ -84,11 +85,15 @@ class BusinessCardCalculator(BaseCalculator):
         if self.lamination:
             lamination_price = self.lamination_prices.get(self.lamination, 0)
             price_per_card += lamination_price
-            
+        
         # Добавляем стоимость скругления углов к цене одной визитки
         if self.corners:
             price_per_card += 2  # Добавляем 2 рубля за скругление углов
-            
+        
+        # Добавляем стоимость технологического отверстия к цене одной визитки
+        if self.tech_hole:
+            price_per_card += 2  # Добавляем 2 рубля за технологическое отверстие
+        
         # Рассчитываем общую стоимость
         price = price_per_card * self.quantity
         

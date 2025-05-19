@@ -124,10 +124,17 @@ form {
     font-weight: bold;
 }
 
-.form-group input[type="checkbox"] + label {
+.form-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 0.5em;
+    vertical-align: middle;
+}
+
+.form-group label.checkbox-label {
     display: inline;
     font-weight: normal;
-    margin-left: 0.5rem;
+    margin-left: 0;
+    vertical-align: middle;
 }
 
 input, select {

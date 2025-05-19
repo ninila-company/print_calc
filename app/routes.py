@@ -35,10 +35,24 @@ def api_calculate(product_type):
                 paper_type=data.get('paper_type', 'offset_300'),
                 color_scheme=data.get('color_scheme', '4+0'),
                 lamination=data.get('lamination', False),
-                corners=data.get('corners', None)
+                corners=data.get('corners', None),
+                tech_hole=data.get('tech_hole', False)
             )
             price = calculator.calculate(data.get('urgency', 'standard'))
-            result = {'success': True, 'price': price}
+            if data.get('tech_hole', False):
+                try:
+                    price += int(data.get('quantity', 100)) * 2
+                except Exception:
+                    price += 2
+            discount = data.get('discount')
+            if discount is not None and discount != '' and discount != 0:
+                try:
+                    discount = float(discount)
+                    if 0 < discount < 100:
+                        price = price * (1 - discount / 100)
+                except Exception:
+                    pass
+            result = {'success': True, 'price': round(price, 2)}
 
         elif product_type == 'flyers':
             calculator = FlyerCalculator(
@@ -49,7 +63,15 @@ def api_calculate(product_type):
                 double_sided=data.get('double_sided', True)
             )
             price = calculator.calculate(data.get('urgency', 'standard'))
-            result = {'success': True, 'price': price}
+            discount = data.get('discount')
+            if discount is not None and discount != '' and discount != 0:
+                try:
+                    discount = float(discount)
+                    if 0 < discount < 100:
+                        price = price * (1 - discount / 100)
+                except Exception:
+                    pass
+            result = {'success': True, 'price': round(price, 2)}
 
         # Здесь будут добавляться другие типы продукции
 
